@@ -1,0 +1,96 @@
+﻿<Window x:Class="WechatPayTest01.Settings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WechatPayTest01.viewmodels"
+        mc:Ignorable="d"
+        Title="Settings" Height="500" Width="700">
+    <Window.DataContext>
+        <local:SettingViewModel />
+    </Window.DataContext>
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="35"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="0,5,20, 0" FontFamily="Times New Roman" FontSize="14">Quick Pay API</Label>
+        <TextBox  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="20,10,0, 0"  
+                  FontFamily="Times New Roman" FontSize="16" VerticalContentAlignment="Center"
+                  Text="{Binding QuickPay_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Cancel Payment API</Label>
+        <TextBox  Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding CancelPay_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Query Order</Label>
+        <TextBox  Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding QueryOrder_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="3" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Submit Refund</Label>
+        <TextBox  Grid.Column="1" Grid.Row="3" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding Refund_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="4" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Query Refund</Label>
+        <TextBox  Grid.Column="1" Grid.Row="4" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding QueryRefund_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="5" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Download Bill</Label>
+        <TextBox  Grid.Column="1" Grid.Row="5" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding DownloadBills_URL}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="6" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Terminal IP</Label>
+        <TextBox  Grid.Column="1" Grid.Row="6" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding Terminal_IP}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="7" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Public Account IP (appid)</Label>
+        <TextBox  Grid.Column="1" Grid.Row="7" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding PublicAccountTD}"></TextBox>
+        
+        <Label Grid.Column="0" Grid.Row="8" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">Vendor ID</Label>
+        <TextBox  Grid.Column="1" Grid.Row="8" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding VenderID}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="9" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">KEY</Label>
+        <TextBox  Grid.Column="1" Grid.Row="9" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding KEY}"></TextBox>
+
+        <Label Grid.Column="0" Grid.Row="10" HorizontalAlignment="Right" Margin="0,5,20, 0" 
+               FontFamily="Times New Roman" FontSize="14">App Secred</Label>
+        <TextBox  Grid.Column="1" Grid.Row="10" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
+                  FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
+                  Text="{Binding AppSecred}"></TextBox>
+    </Grid>
+</Window>

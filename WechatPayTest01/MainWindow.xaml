@@ -1,0 +1,212 @@
+﻿<Window x:Class="WechatPayTest01.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WechatPayTest01.viewmodels"
+        mc:Ignorable="d" BorderThickness="1" BorderBrush="LightGray" Background="WhiteSmoke"
+        Height="700" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Title="WechatPayTest"  WindowStyle="None">
+    <Window.ContextMenu>
+        <ContextMenu FontFamily="Times New Roman"/>
+    </Window.ContextMenu>
+    <Window.DataContext>
+        <local:MainWindosViewModel />
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Background="DarkGreen" >
+            <Button x:Name="button" Margin="10,10,10,0" VerticalAlignment="Top" Width="120" Height="36"
+                    Background="DodgerBlue" HorizontalAlignment="Right" BorderThickness="0"
+                    Click="Settings_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="25" Height="25" Fill="White"  Margin="5,0">
+                        <Rectangle.OpacityMask>
+                            <VisualBrush Stretch="Fill" Visual="{StaticResource SettingsIcon}" />
+                        </Rectangle.OpacityMask>
+                    </Rectangle>
+                    <Label Content="Settings" HorizontalContentAlignment="Center" Margin="5,0"
+                           FontFamily="Times New Roman" FontSize="14" Foreground="White"  />
+                </StackPanel>
+            </Button>
+
+            <Label FontSize="24" FontFamily="Times New Roman" BorderBrush="Transparent"
+                     Background="Transparent" Foreground="White" Margin="10" 
+                     HorizontalContentAlignment="left" VerticalContentAlignment="Bottom">
+                Wechat Pay TEST
+            </Label>
+        </StackPanel>
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+                <ColumnDefinition Width="41"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0" Name="FirstList">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="300"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" Name="payapi">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="60"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="45"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" FontSize="18" FontFamily="Times New Roman"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10, 5"
+                           >Total Pay:</Label>
+                    <Label Grid.Column="0" Grid.Row="1" FontSize="18" FontFamily="Times New Roman"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10, 5"
+                           >Barcode:</Label>
+                    <Label Grid.Column="0" Grid.Row="2" FontSize="14" FontFamily="Times New Roman"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10, 5"
+                           >Production Description:</Label>
+                    <Label Grid.Column="0" Grid.Row="4" FontSize="12" FontFamily="Times New Roman"
+                           HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10, 5"
+                           >Time elapsed:</Label>
+                    <Label Grid.Column="0" Grid.Row="5" FontSize="12" FontFamily="Times New Roman"
+                           HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10, 5"
+                           >Return status:</Label>
+                    <TextBox  Grid.Column="1" Grid.Row="0" FontSize="20" FontFamily="Times New Roman"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 3" 
+                              HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                              Text="{Binding TotalPay}">
+                    </TextBox>
+                    <TextBox  Grid.Column="1" Grid.Row="1" FontSize="20" FontFamily="Times New Roman"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10,3" 
+                              HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" 
+                              Text="{Binding Barcode}">
+                    </TextBox>
+                    <TextBox  Grid.Column="1" Grid.Row="2" FontSize="20" FontFamily="Times New Roman"
+                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="10, 3" 
+                              HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
+                              Text="{Binding ProductDescription}">
+                    </TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="10, 5" VerticalContentAlignment="Bottom" Text="{Binding TimeElapsed}" 
+                             BorderThickness="0"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Top" Text="{Binding TransMessage}" 
+                             BorderThickness="0"></TextBox>
+                    <Button Grid.Column="1" Grid.Row="3" Margin="10,5" 
+                            Background="DodgerBlue" Foreground="White" BorderThickness="0"
+                            FontSize="20" FontFamily="Times New Roman"
+                            Command="{Binding QuickPay_Command}">
+                        Submit
+                    </Button>
+
+                </Grid>
+
+                <Grid Grid.Row="1" Name="command">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,5">
+                            Transaction no:</Label>
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Top" Text="{Binding TransMessage}" 
+                             ></TextBox>
+                    </Grid>
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                            <ColumnDefinition Width="1*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"></RowDefinition>
+                            <RowDefinition Height="55"></RowDefinition>
+                            <RowDefinition Height="55"></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Button Name="Cancel" Margin="10,5" 
+                                Grid.Column="0" Grid.Row="0"
+                                Background="DodgerBlue" Foreground="White"  BorderThickness="0"
+                                FontSize="16" FontFamily="times new roman"
+                                Command="{Binding QuickPay_Command}">Quick Pay</Button>
+                        <Button Name="QueryOrder" Margin="10,5" 
+                                Grid.Column="1" Grid.Row="0"
+                                Background="DodgerBlue" Foreground="White" BorderThickness="0"
+                                FontSize="18" FontFamily="times new roman" Grid.ColumnSpan="2"
+                                Command="{Binding QueryOrder_Command}">Order Query</Button>
+                        <Button Name="DownloadBills" Margin="10,5" 
+                                Grid.Column="0" Grid.Row="2"
+                                Background="DodgerBlue" Foreground="White" BorderThickness="0"
+                                FontSize="18" FontFamily="times new roman"
+                                Command="{Binding QueryOrder_Command}">Download Bills</Button>
+                        <Button Name="Refund" Margin="10,5" 
+                                Grid.Column="0" Grid.Row="1"
+                                Background="DodgerBlue" Foreground="White" BorderThickness="0"
+                                FontSize="18" FontFamily="times new roman" 
+                                Command="{Binding QueryOrder_Command}">Refund</Button>
+                        <Button Name="QueryRefund" Margin="10,5" 
+                                Grid.Column="1" Grid.Row="1"
+                                Background="DodgerBlue" Foreground="White" BorderThickness="0"
+                                FontSize="18" FontFamily="times new roman"
+                                Command="{Binding QueryOrder_Command}">Refund Query</Button>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid Grid.Column="1" Margin="20">
+                <Line X1="0" Y1="0" X2="0" Y2="500" Stroke="LightGray" StrokeThickness="1"></Line>
+            </Grid>
+            <Grid Grid.Column="2" Name="Second">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" FontSize="14" FontFamily="times new roman">RESPONSES</Label>
+                <StackPanel Grid.Row="1" >
+                    <Label>Query Order</Label>
+                    <TextBox Margin="50, 0, 0, 0" FontSize="16"></TextBox>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Label>Query Order</Label>
+                    <ListView Margin="50, 0, 0, 0" VerticalAlignment="top" VerticalContentAlignment="Stretch" 
+                              ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" >
+                        <ListView.View>
+                            <GridView >
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+                <StackPanel Grid.Row="3">
+                    <Label>Query Order</Label>
+                    <ListView Margin="50, 0, 0, 0"  
+                              VerticalAlignment="Top" VerticalContentAlignment="Stretch" 
+                              ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                              >
+                        <ListView.View>
+                            <GridView >
+
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        <Grid Grid.Row="2" Background="LightGray">
+            <Button Width="80" HorizontalAlignment="Right" Margin="10" BorderThickness="0" 
+                    Background="Gray" Foreground="White" 
+                        Click="Close_Click">CLOSE</Button>
+
+        </Grid>
+    </Grid>
+</Window>
