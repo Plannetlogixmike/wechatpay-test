@@ -94,9 +94,10 @@
                               HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom"
                               Text="{Binding ProductDescription}">
                     </TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="4" Margin="10, 5" VerticalContentAlignment="Bottom" Text="{Binding TimeElapsed}" 
-                             BorderThickness="0"></TextBox>
-                    <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Top" Text="{Binding TransMessage}" 
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="10, 5" 
+                             VerticalContentAlignment="Center" HorizontalContentAlignment="Right"
+                             Text="{Binding TimeElapsed}" BorderThickness="0"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Center" Text="{Binding Return_Status}" 
                              BorderThickness="0"></TextBox>
                     <Button Grid.Column="1" Grid.Row="3" Margin="10,5" 
                             Background="DodgerBlue" Foreground="White" BorderThickness="0"
@@ -119,7 +120,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="10,5">
                             Transaction no:</Label>
-                        <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Top" Text="{Binding TransMessage}" 
+                        <TextBox Grid.Column="1" Grid.Row="5" Margin="10, 5" VerticalContentAlignment="Center" Text="{Binding Transaction_NO}" 
                              ></TextBox>
                     </Grid>
                     <Grid Grid.Row="1">
@@ -174,7 +175,7 @@
                 <Label Grid.Row="0" FontSize="14" FontFamily="times new roman">RESPONSES</Label>
                 <StackPanel Grid.Row="1" >
                     <Label>Query Order</Label>
-                    <TextBox Margin="50, 0, 0, 0" FontSize="16"></TextBox>
+                    <TextBox Margin="50, 0, 0, 0" FontSize="12"  Text="{Binding TransMessage}"></TextBox>
                 </StackPanel>
                 <StackPanel Grid.Row="2">
                     <Label>Query Order</Label>
@@ -202,7 +203,7 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        <Grid Grid.Row="2" Background="LightGray">
+        <Grid Grid.Row="2" Background="LightGray" Margin="-86,0,86,0">
             <Button Width="80" HorizontalAlignment="Right" Margin="10" BorderThickness="0" 
                     Background="Gray" Foreground="White" 
                         Click="Close_Click">CLOSE</Button>

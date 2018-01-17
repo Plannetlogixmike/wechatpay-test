@@ -23,5 +23,13 @@ namespace WechatPayTest01
         {
             InitializeComponent();
         }
+
+        private void SwitchURL_Click(object sender, RoutedEventArgs e)
+        {
+            if (QuickPay.Text.Contains("Sendboxnew"))
+            {
+
+            }
+        }
     }
 }

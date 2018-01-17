@@ -16,13 +16,13 @@ namespace WechatPayTest01.lib
     /// </summary>
     public class WxPayData
     {
-        string _key;
+        static string _key;
         public WxPayData()
         {
 
         }
 
-        public string Key
+        static public string Key
         {
             get { return _key; }
             set { _key = value; }
@@ -202,8 +202,30 @@ namespace WechatPayTest01.lib
 
                 str += string.Format("{0}={1}<br>", pair.Key, pair.Value.ToString());
             }
-            Log.Debug(this.GetType().ToString(), "Print in Web Page : " + str);
+//            Log.Debug(this.GetType().ToString(), "Print in Web Page : " + str);
             return str;
+        }
+
+        public string GetTransNumber()
+        {
+            string result = string.Empty;
+
+            foreach(KeyValuePair<string, object> pair in m_values)
+            {
+                if(pair.Key== "transaction_id")
+                {
+                    result += pair.Key + " " + pair.Value.ToString()+ ";";
+                }
+                if (pair.Key == "out_trade_no")
+                {
+                    result += pair.Key + " " + pair.Value.ToString() + ";";
+                }
+                if (pair.Key == "total_fee")
+                {
+                    result += pair.Key + " " + Convert.ToDouble(pair.Value.ToString())/100 + ";";
+                }
+            }
+            return result;
         }
 
         /**

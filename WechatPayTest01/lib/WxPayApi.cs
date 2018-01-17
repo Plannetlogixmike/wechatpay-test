@@ -163,8 +163,8 @@ namespace WechatPayTest01.lib
             inputObj.SetValue("appid", Public_Account_ID);//公众账号ID
             inputObj.SetValue("mch_id", Vender_ID);//商户号
             inputObj.SetValue("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));//随机字符串
-//            inputObj.Key = KEY;
-            inputObj.Key = GetSignKey();
+                                                                                       //            inputObj.Key = KEY;
+            WxPayData.Key = GetSignKey();
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
             string xml = inputObj.ToXml();
 
@@ -207,7 +207,7 @@ namespace WechatPayTest01.lib
             inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
             inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
             inputObj.SetValue("nonce_str", WxPayApi.GenerateNonceStr());//随机字符串
-            inputObj.Key = KEY;
+            WxPayData.Key = KEY;
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
 
             string xml = inputObj.ToXml();
@@ -251,7 +251,7 @@ namespace WechatPayTest01.lib
             inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
             inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
             inputObj.SetValue("nonce_str", GenerateNonceStr());//随机字符串
-            inputObj.Key = KEY;
+            WxPayData.Key = KEY;
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
             string xml = inputObj.ToXml();
 
@@ -311,7 +311,7 @@ namespace WechatPayTest01.lib
             inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
             inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
             inputObj.SetValue("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));//随机字符串
-            inputObj.Key = KEY;
+            WxPayData.Key = KEY;
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
 
             string xml = inputObj.ToXml();
@@ -358,7 +358,7 @@ namespace WechatPayTest01.lib
 		    inputObj.SetValue("appid",WxPayConfig.APPID);//公众账号ID
 		    inputObj.SetValue("mch_id",WxPayConfig.MCHID);//商户号
 		    inputObj.SetValue("nonce_str",GenerateNonceStr());//随机字符串
-            inputObj.Key = KEY;
+            WxPayData.Key = KEY;
 		    inputObj.SetValue("sign",inputObj.MakeSign());//签名
 
             string xml = inputObj.ToXml();
@@ -401,7 +401,7 @@ namespace WechatPayTest01.lib
             inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
             inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
             inputObj.SetValue("nonce_str", GenerateNonceStr());//随机字符串
-            inputObj.Key = KEY;
+            WxPayData.Key = KEY;
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
 
             string xml = inputObj.ToXml();
@@ -712,7 +712,7 @@ namespace WechatPayTest01.lib
             WxPayData signParam = new WxPayData();
             signParam.SetValue("mch_id", Vender_ID);
             signParam.SetValue("nonce_str", nonceStr);
-            signParam.Key = KEY;
+            WxPayData.Key = KEY;
             signParam.SetValue("sign", signParam.MakeSign());
             string xml = signParam.ToXml();
             string url = "https://api.mch.weixin.qq.com/sandboxnew/pay/getsignkey";
@@ -728,7 +728,7 @@ namespace WechatPayTest01.lib
             else if (result.IsSet("return_msg"))
                 throw new WxPayException(result.GetValue("return_msg").ToString());
             else
-                throw new WxPayException("获取沙箱密钥失败！");
+                throw new WxPayException("Failed in getting sandbox key.");
 
 
      // original code

@@ -18,7 +18,7 @@ namespace WechatPayTest01.Business
         */
 
 
-        public static string Run(string body, string total_fee, string auth_code)
+        public static WxPayData Run(string body, string total_fee, string auth_code)
         {
 //            Log.Info("MicroPay", "Micropay is processing...");
 
@@ -40,14 +40,15 @@ namespace WechatPayTest01.Business
 
 		    //签名验证
             result.CheckSign();
-            Log.Debug("MicroPay", "Micropay response check sign success");
+ //           Log.Debug("MicroPay", "Micropay response check sign success");
 
             //刷卡支付直接成功
             if(result.GetValue("return_code").ToString() == "SUCCESS" &&
 		        result.GetValue("result_code").ToString() == "SUCCESS")
             {
-                Log.Debug("MicroPay", "Micropay business success, result : " + result.ToXml());
-                return result.ToPrintStr();
+                //                Log.Debug("MicroPay", "Micropay business success, result : " + result.ToXml());
+                //               return result.ToPrintStr();
+                return result;
             }
 
             /******************************************************************
@@ -58,7 +59,7 @@ namespace WechatPayTest01.Business
 		    result.GetValue("err_code").ToString() != "SYSTEMERROR")
 		    {
                 Log.Error("MicroPay", "micropay API interface call success, business failure, result : " + result.ToXml());
-                return result.ToPrintStr();
+                return result;
 		    }
 
             //2）不能确定是否失败，需查单
@@ -81,13 +82,13 @@ namespace WechatPayTest01.Business
                 else if(succResult == 1)
                 {
                     Log.Debug("MicroPay", "Mircopay success, return order query result : " + queryResult.ToXml());
-                    return queryResult.ToPrintStr();
+                    return queryResult;
 			    }
                 //订单交易失败，直接返回刷卡支付接口返回的结果，失败原因会在err_code中描述
                 else
                 {
                     Log.Error("MicroPay", "Micropay failure, return micropay result : " + result.ToXml());
-                    return result.ToPrintStr();
+                    return result;
 			    }
 		    }
 
@@ -99,7 +100,7 @@ namespace WechatPayTest01.Business
                 throw new WxPayException("Reverse order failure！");
 		    }
 
-            return result.ToPrintStr();
+            return result;
         }
 
 

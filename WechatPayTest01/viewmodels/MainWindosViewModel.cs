@@ -14,6 +14,11 @@ namespace WechatPayTest01.viewmodels
     class MainWindosViewModel: INotifyPropertyChanged
     {
         private double _totalPay = 0;
+        private string _transaction_no;
+        private string _trans_message;
+        private string _return_status;
+        private double _time_elapsed;
+        private WxPayData quickpayreturn;
 
         SettingViewModel settings = new SettingViewModel();
 
@@ -32,7 +37,7 @@ namespace WechatPayTest01.viewmodels
             Refund_Command = new RelayCommand(new Action<object>(RefundPayment));
             RefundQuery_Command = new RelayCommand(new Action<object>(RefundQuery));
             DownloadBills_Command = new RelayCommand(new Action<object>(DownloadBills));
-            _totalPay = 37.75;
+            _totalPay = 0.01;
             settings.Set_Urls();
         }
 
@@ -41,11 +46,54 @@ namespace WechatPayTest01.viewmodels
 
         public string ProductDescription { get; set; } = "Mc. BigMAX Combo";
 
-        public string Transaction_NO { get; set; }
+        public string Transaction_NO {
+            get { return _transaction_no; }
+            set {
+                if (Transaction_NO != value)
+                {
+                    _transaction_no = value;
+                    OnPropertyChanged("Transaction_NO");
+                }
+            }
+        }
 
-        public string TransMessage { get; set; }
+        public string Return_Status
+        {
+            get { return _return_status; }
+            set
+            {
+                if (Return_Status != value)
+                {
+                    _return_status = value;
+                    OnPropertyChanged("Return_Status");
+                }
+            }
+        }
 
-        public string TimeElapsed { get; set; }
+        public string TransMessage {
+            get { return _trans_message; }
+            set
+            {
+                if (TransMessage != value)
+                {
+                    _trans_message = value;
+                    OnPropertyChanged("TransMessage");
+                }
+            }
+        }
+
+        public double TimeElapsed
+        {
+            get { return _time_elapsed; }
+            set
+            {
+                if (TimeElapsed != value)
+                {
+                    _time_elapsed = value;
+                    OnPropertyChanged("TimeElapsed");
+                }
+            }
+        }
 
         public double TotalPay {
             get { return _totalPay; }
@@ -77,9 +125,11 @@ namespace WechatPayTest01.viewmodels
             {
                 ShowMessage("please input the production description");
             }
+            var start = DateTime.Now;//请求开始时间
             try
             {
-                string result = MicroPay.Run(ProductDescription, (_totalPay * 100).ToString(), Barcode);
+                //                string result = MicroPay.Run(ProductDescription, (Math.Floor(_totalPay * 100)).ToString(), Barcode);
+                quickpayreturn =  MicroPay.Run(ProductDescription, (Math.Floor(_totalPay * 100)).ToString(), Barcode);
             }
             catch (WxPayException ex)
             {
@@ -89,6 +139,15 @@ namespace WechatPayTest01.viewmodels
             {
                 ShowMessage(ex.ToString());
             }
+
+            var end = DateTime.Now;//请求开始时间
+            int timeCost = (int)((end - start).TotalMilliseconds);//获得接口耗时
+            TimeElapsed = timeCost / 1000.0;
+            Transaction_NO = quickpayreturn.GetValue("transaction_id").ToString();
+            TransMessage = "T_id: " + quickpayreturn.GetValue("transaction_id").ToString() + "; "
+                            + "trade_no: " + quickpayreturn.GetValue("out_trade_no").ToString() + "; "
+                            + "total: " + quickpayreturn.GetValue("total_fee").ToString() + "; ";
+            Return_Status = quickpayreturn.GetValue("result_code").ToString();
         }
 
         public void RefundPayment(object obj)
@@ -186,5 +245,26 @@ namespace WechatPayTest01.viewmodels
             }
         }
 
+        //public string GetTransNumber(WxPayData data)
+        //{
+        //    string result = string.Empty;
+
+        //    foreach (KeyValuePair<string, object> pair in data)
+        //    {
+        //        if (pair.Key == "transaction_id")
+        //        {
+        //            result += pair.Key + " " + pair.Value.ToString() + ";";
+        //        }
+        //        if (pair.Key == "out_trade_no")
+        //        {
+        //            result += pair.Key + " " + pair.Value.ToString() + ";";
+        //        }
+        //        if (pair.Key == "total_fee")
+        //        {
+        //            result += pair.Key + " " + Convert.ToDouble(pair.Value.ToString()) / 100 + ";";
+        //        }
+        //    }
+        //    return result;
+        //}
     }
 }

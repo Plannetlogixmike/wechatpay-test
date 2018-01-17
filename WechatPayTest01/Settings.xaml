@@ -26,12 +26,12 @@
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
             <RowDefinition Height="35"></RowDefinition>
-            <RowDefinition Height="35"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <Label Grid.Column="0" Grid.Row="0" HorizontalAlignment="Right" Margin="0,5,20, 0" FontFamily="Times New Roman" FontSize="14">Quick Pay API</Label>
         <TextBox  Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Margin="20,10,0, 0"  
                   FontFamily="Times New Roman" FontSize="16" VerticalContentAlignment="Center"
-                  Text="{Binding QuickPay_URL}"></TextBox>
+                  Name="QuickPay" Text="{Binding QuickPay_URL}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right" Margin="0,5,20, 0" 
                FontFamily="Times New Roman" FontSize="14">Cancel Payment API</Label>
@@ -92,5 +92,9 @@
         <TextBox  Grid.Column="1" Grid.Row="10" HorizontalAlignment="Stretch" Margin="20,10,0, 0" 
                   FontFamily="Times New Roman" FontSize="16"  VerticalContentAlignment="Center"
                   Text="{Binding AppSecred}"></TextBox>
+        <Button Grid.Column="1" Grid.Row="11" Width="150" Click="SwitchURL_Click"
+                HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="30">
+            Switch Sandbox url
+        </Button>
     </Grid>
 </Window>
