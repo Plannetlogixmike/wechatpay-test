@@ -15,7 +15,7 @@ namespace WechatPayTest01.Business
         */
         public static string Run(string transaction_id, string out_trade_no)
         {
-            Log.Info("OrderQuery", "OrderQuery is processing...");
+//            Log.Info("OrderQuery", "OrderQuery is processing...");
 
             WxPayData data = new WxPayData();
             if(!string.IsNullOrEmpty(transaction_id))//如果微信订单号存在，则以微信订单号为准
@@ -29,7 +29,7 @@ namespace WechatPayTest01.Business
 
             WxPayData result = WxPayApi.OrderQuery(data);//提交订单查询请求给API，接收返回数据
 
-            Log.Info("OrderQuery", "OrderQuery process complete, result : " + result.ToXml());
+//            Log.Info("OrderQuery", "OrderQuery process complete, result : " + result.ToXml());
             return result.ToPrintStr();
         }
     }

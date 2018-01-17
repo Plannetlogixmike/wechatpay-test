@@ -143,7 +143,7 @@ namespace WechatPayTest01.viewmodels
             var end = DateTime.Now;//请求开始时间
             int timeCost = (int)((end - start).TotalMilliseconds);//获得接口耗时
             TimeElapsed = timeCost / 1000.0;
-            Transaction_NO = quickpayreturn.GetValue("transaction_id").ToString();
+            Transaction_NO = quickpayreturn.GetValue("out_trade_no").ToString();
             TransMessage = "T_id: " + quickpayreturn.GetValue("transaction_id").ToString() + "; "
                             + "trade_no: " + quickpayreturn.GetValue("out_trade_no").ToString() + "; "
                             + "total: " + quickpayreturn.GetValue("total_fee").ToString() + "; ";
@@ -178,7 +178,7 @@ namespace WechatPayTest01.viewmodels
             }
             try
             {
-                string result = OrderQuery.Run(Transaction_NO, null);//调用订单查询业务逻辑
+                string result = OrderQuery.Run(null, Transaction_NO);//调用订单查询业务逻辑
             }
             catch (WxPayException ex)
             {

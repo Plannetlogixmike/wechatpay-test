@@ -195,7 +195,7 @@ namespace WechatPayTest01.lib
         * @throws WxPayException
         * @return 成功时返回订单查询结果，其他抛异常
         */
-        public static WxPayData OrderQuery(WxPayData inputObj, int timeOut = 6)
+        public static WxPayData OrderQuery(WxPayData inputObj, int timeOut = 10)
         {
 //            string url = "https://api.mch.weixin.qq.com/pay/orderquery";
             //检测必填参数
@@ -204,19 +204,28 @@ namespace WechatPayTest01.lib
                 throw new WxPayException("订单查询接口中，out_trade_no、transaction_id至少填一个！");
             }
 
-            inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
-            inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
-            inputObj.SetValue("nonce_str", WxPayApi.GenerateNonceStr());//随机字符串
-            WxPayData.Key = KEY;
+            //inputObj.SetValue("appid", WxPayConfig.APPID);//公众账号ID
+            //inputObj.SetValue("mch_id", WxPayConfig.MCHID);//商户号
+            //inputObj.SetValue("nonce_str", WxPayApi.GenerateNonceStr());//随机字符串
+            //WxPayData.Key = KEY;
+            //inputObj.SetValue("sign", inputObj.MakeSign());//签名
+
+//            inputObj.SetValue("spbill_create_ip", Terminal_IP);//终端ip
+            inputObj.SetValue("appid", Public_Account_ID);//公众账号ID
+            inputObj.SetValue("mch_id", Vender_ID);//商户号
+            inputObj.SetValue("nonce_str", Guid.NewGuid().ToString().Replace("-", ""));//随机字符串
+                                                                                       //            inputObj.Key = KEY;
+            WxPayData.Key = GetSignKey();
             inputObj.SetValue("sign", inputObj.MakeSign());//签名
+
 
             string xml = inputObj.ToXml();
 
             var start = DateTime.Now;
 
-            Log.Debug("WxPayApi", "OrderQuery request : " + xml);
+//            Log.Debug("WxPayApi", "OrderQuery request : " + xml);
             string response = HttpService.Post(xml, _url_orderquery, false, timeOut);//调用HTTP通信接口提交数据
-            Log.Debug("WxPayApi", "OrderQuery response : " + response);
+//            Log.Debug("WxPayApi", "OrderQuery response : " + response);
 
             var end = DateTime.Now;
             int timeCost = (int)((end - start).TotalMilliseconds);//获得接口耗时

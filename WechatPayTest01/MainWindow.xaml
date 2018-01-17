@@ -143,22 +143,22 @@
                                 Grid.Column="1" Grid.Row="0"
                                 Background="DodgerBlue" Foreground="White" BorderThickness="0"
                                 FontSize="18" FontFamily="times new roman" Grid.ColumnSpan="2"
-                                Command="{Binding QueryOrder_Command}">Order Query</Button>
+                                Command="{Binding OrderQuery_Command}">Order Query</Button>
                         <Button Name="DownloadBills" Margin="10,5" 
                                 Grid.Column="0" Grid.Row="2"
                                 Background="DodgerBlue" Foreground="White" BorderThickness="0"
                                 FontSize="18" FontFamily="times new roman"
-                                Command="{Binding QueryOrder_Command}">Download Bills</Button>
+                                Command="{Binding DownloadBills_Command}">Download Bills</Button>
                         <Button Name="Refund" Margin="10,5" 
                                 Grid.Column="0" Grid.Row="1"
                                 Background="DodgerBlue" Foreground="White" BorderThickness="0"
                                 FontSize="18" FontFamily="times new roman" 
-                                Command="{Binding QueryOrder_Command}">Refund</Button>
+                                Command="{Binding Refund_Command}">Refund</Button>
                         <Button Name="QueryRefund" Margin="10,5" 
                                 Grid.Column="1" Grid.Row="1"
                                 Background="DodgerBlue" Foreground="White" BorderThickness="0"
                                 FontSize="18" FontFamily="times new roman"
-                                Command="{Binding QueryOrder_Command}">Refund Query</Button>
+                                Command="{Binding RefundQuery_Command}">Refund Query</Button>
                     </Grid>
                 </Grid>
             </Grid>
